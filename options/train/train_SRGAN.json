@@ -1,0 +1,82 @@
+// Not total the same as SRGAN in <Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network>
+{
+  "name": "ED_UNet_SepChan" //  please remove "debug_" during training
+  , "use_tb_logger": true
+  , "model":"sr"
+  , "scale": 1
+  , "gpu_ids": [0]
+
+  , "datasets": {
+    "train": {
+      "name": "Combined_Haze"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/mlip/Documents/Kalpesh/Dehazing/TrainY"
+      , "dataroot_LR": "/home/mlip/Documents/Kalpesh/Dehazing/TrainX"
+      , "subset_file": null
+      , "use_shuffle": true
+      , "n_workers": 8
+      , "batch_size": 4
+      , "HR_size": 192
+      , "use_flip": true
+      , "use_rot": true
+    }
+    , "val": {
+      "name": "our_val"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/home/mlip/Documents/Kalpesh/Dehazing/ValNonHazy"
+      , "dataroot_LR": "/home/mlip/Documents/Kalpesh/Dehazing/ValHazy"
+    }
+  }
+
+  , "path": {
+    "root": "/home/mlip/Documents/Kalpesh/Dehazing/Try5"
+    //, "resume_state": "/media/ml/Data Disk/ESRGAN/experiments/001_SRGAN_PSNR_x4_DIV2K/training_state/330000.state"
+    , "pretrain_model_G": null
+  }
+
+  , "network_G": {
+    "which_model_G": "SRGAN_Gen" // RRDB_net | sr_resnet | SRGANGen
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 128
+    , "nb": 23
+    , "in_nc": 3
+    , "out_nc": 3
+  }
+  , "network_D": {
+    "which_model_D": "discriminator_SRGAN"
+    , "norm_type": "batch"
+    , "act_type": "leakyrelu"
+    , "mode": "CNA"
+    , "nf": 64
+    , "in_nc": 3
+  }
+
+  , "train": {
+    "lr_G": 1e-4
+    , "weight_decay_G": 0
+    , "beta1_G": 0.9
+    , "lr_D": 2e-5
+    , "weight_decay_D": 0
+    , "beta1_D": 0.9
+    , "lr_scheme": "MultiStepLR"
+    , "lr_steps": [100000, 200000, 200000,300000,400000,500000,600000,700000,800000,900000]
+    , "lr_gamma": 0.5
+
+    , "pixel_criterion": "l1"
+    , "pixel_weight": 1
+    , "feature_criterion": "l2"
+    , "feature_weight": 0
+    , "gan_type": "lsgan"
+    , "gan_weight": 0.1
+
+    , "manual_seed": 0
+    , "niter": 1000000
+    , "val_freq": 2000
+  }
+
+  , "logger": {
+    "print_freq": 200
+    , "save_checkpoint_freq": 2000
+  }
+}

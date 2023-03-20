@@ -1,0 +1,627 @@
+23-03-20 15:56:07.531 - INFO:   name: KAIST_x4
+  suffix: None
+  model: sr
+  scale: 1
+  gpu_ids: [0]
+  datasets:[
+    test_1:[
+      name: set5
+      mode: LR
+      dataroot_LR: /media/dl/DL/NTIRE2023/dehaze1/testing/small_files
+      phase: test
+      scale: 1
+      data_type: img
+    ]
+  ]
+  path:[
+    root: /media/dl/DL/NTIRE2023/dehaze1/try1
+    pretrain_model_G: /media/dl/DL/NTIRE2023/dehaze1/try1/experiments/try1/models/70000_G.pth
+    results_root: /media/dl/DL/NTIRE2023/dehaze1/try1/results/KAIST_x4
+    log: /media/dl/DL/NTIRE2023/dehaze1/try1/results/KAIST_x4
+  ]
+  network_G:[
+    which_model_G: sr_resnet
+    norm_type: None
+    mode: CNA
+    nf: 64
+    nb: 16
+    in_nc: 3
+    out_nc: 3
+    no_bb: 3
+    no_cb: 5
+    gc: 32
+    group: 1
+    scale: 1
+  ]
+  is_train: False
+
+23-03-20 15:56:07.532 - INFO: Dataset [LRDataset - set5] is created.
+23-03-20 15:56:07.532 - INFO: Number of test images in [set5]: 5
+23-03-20 15:56:08.943 - INFO: Loading pretrained model for G [/media/dl/DL/NTIRE2023/dehaze1/try1/experiments/try1/models/70000_G.pth] ...
+23-03-20 15:56:08.982 - INFO: Network G structure: DataParallel - ProposedNetwork, with parameters: 4,446,421
+23-03-20 15:56:08.982 - INFO: ProposedNetwork(
+  (model): MyNetwork(
+    (c0): Sequential(
+      (0): Conv2d(3, 64, kernel_size=(5, 5), stride=(1, 1), padding=(2, 2))
+      (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    )
+    (r1): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+    )
+    (r2): Residual(
+      (uk3_1): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (uk3_2): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (uk3_3): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (lk3_1): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (lk3_2): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (lk3_3): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (k1): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+    )
+    (r3): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+    )
+    (r4): Residual(
+      (uk3_1): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (uk3_2): Sequential(
+        (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (uk3_3): Sequential(
+        (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (lk3_1): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (lk3_2): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (lk3_3): Sequential(
+        (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+      (k1): Sequential(
+        (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+        (1): ReLU(inplace=True)
+      )
+    )
+    (r11): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+      (2): PA(
+        (c1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), groups=64)
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+      )
+    )
+    (r12): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+    )
+    (r13): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+      (2): PA(
+        (c1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), groups=64)
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+      )
+    )
+    (r14): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+    )
+    (r21): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): PA(
+        (c1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), groups=64)
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+      )
+      (2): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+      (3): SA(
+        (spatial_reduction): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=64)
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+        (spatial_pool): AvgPool2d(kernel_size=5, stride=3, padding=0)
+        (smoothing): Sequential(
+          (0): ReflectionPad2d((4, 4, 4, 4))
+          (1): Conv2d(64, 64, kernel_size=(5, 5), stride=(1, 1), dilation=(2, 2))
+          (2): ReLU(inplace=True)
+        )
+      )
+    )
+    (r22): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): PA(
+        (c1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), groups=64)
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+      )
+      (2): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+    )
+    (r23): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): PA(
+        (c1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), groups=64)
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+      )
+      (2): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+      (3): SA(
+        (spatial_reduction): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), groups=64)
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+        (spatial_pool): AvgPool2d(kernel_size=5, stride=3, padding=0)
+        (smoothing): Sequential(
+          (0): ReflectionPad2d((4, 4, 4, 4))
+          (1): Conv2d(64, 64, kernel_size=(5, 5), stride=(1, 1), dilation=(2, 2))
+          (2): ReLU(inplace=True)
+        )
+      )
+    )
+    (r24): Sequential(
+      (0): Residual(
+        (uk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_2): Sequential(
+          (0): Conv2d(128, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (uk3_3): Sequential(
+          (0): Conv2d(192, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_2): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (lk3_3): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+        (k1): Sequential(
+          (0): Conv2d(256, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): ReLU(inplace=True)
+        )
+      )
+      (1): PA(
+        (c1): Sequential(
+          (0): Conv2d(64, 64, kernel_size=(1, 1), stride=(1, 1), groups=64)
+          (1): LeakyReLU(negative_slope=0.2, inplace=True)
+        )
+      )
+      (2): CA(
+        (gap): AdaptiveAvgPool2d(output_size=(1, 1))
+        (conv0): Sequential(
+          (0): Conv2d(64, 16, kernel_size=(1, 1), stride=(1, 1))
+          (1): PReLU(num_parameters=1)
+        )
+        (conv1): Sequential(
+          (0): Conv2d(16, 64, kernel_size=(1, 1), stride=(1, 1))
+          (1): Sigmoid()
+        )
+      )
+    )
+    (c1): Sequential(
+      (0): Conv2d(256, 10, kernel_size=(1, 1), stride=(1, 1), groups=2)
+      (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    )
+    (c2): Sequential(
+      (0): Conv2d(256, 20, kernel_size=(1, 1), stride=(1, 1), groups=2)
+      (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    )
+    (c3): Sequential(
+      (0): Conv2d(256, 10, kernel_size=(1, 1), stride=(1, 1), groups=2)
+      (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    )
+    (c4): Sequential(
+      (0): Conv2d(40, 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    )
+    (c5): Sequential(
+      (0): Conv2d(64, 3, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1))
+      (1): LeakyReLU(negative_slope=0.2, inplace=True)
+    )
+  )
+)
+23-03-20 15:56:08.983 - INFO: Model [SRModel] is created.
+23-03-20 15:56:08.983 - INFO: 
+Testing [set5]...
+23-03-20 15:56:10.455 - INFO: 1
+23-03-20 15:56:10.904 - INFO: 2
+23-03-20 15:56:11.352 - INFO: 3
+23-03-20 15:56:11.774 - INFO: 4
+23-03-20 15:56:12.216 - INFO: 5

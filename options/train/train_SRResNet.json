@@ -1,0 +1,68 @@
+// Not total the same as SRResNet in <Photo-Realistic Single Image Super-Resolution Using a Generative Adversarial Network>
+// With 16 Residual blocks w/o BN
+{
+  "name": "try1" //  please remove "debug_" during training
+  , "use_tb_logger": true
+  , "model":"sr"
+  , "scale": 1
+  , "gpu_ids": [1]
+
+  , "datasets": {
+    "train": {
+      "name": "DIV2K"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/media/dl/DL/NTIRE2023/TrainY"
+      , "dataroot_LR": "/media/dl/DL/NTIRE2023/TrainX"
+      , "subset_file": null
+      , "use_shuffle": true
+      , "n_workers": 8
+      , "batch_size": 8
+      , "HR_size": 128 // 128 | 192
+      , "use_flip": true
+      , "use_rot": true
+    }
+    , "val": {
+      "name": "val_set"
+      , "mode": "LRHR"
+      , "dataroot_HR": "/media/dl/DL/NTIRE2023/ValNonHazy"
+      , "dataroot_LR": "/media/dl/DL/NTIRE2023/ValHazy"
+    }
+  }
+
+  , "path": {
+    "root": "/media/dl/DL/NTIRE2023/dehaze1/try1"
+     //, "resume_state": "/media/dl/DL/Heena/PBVS_2022/try_5/experiments/try5/training_state/25000.state"
+     //, "pretrain_model_G": "/media/dl/DL/Heena/PBVS_2022/try_5/experiments/try5/models/25000_G.pth"
+  }
+
+  , "network_G": {
+    "which_model_G": "sr_resnet" // RRDB_net | sr_resnet
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 16
+    , "no_bb": 3
+    , "no_cb": 5
+    , "in_nc": 3
+    , "out_nc": 3
+  }
+
+  , "train": {
+    "lr_G": 1e-4
+    , "lr_scheme": "MultiStepLR"
+    , "lr_steps": [15000, 30000, 45000, 60000, 75000, 90000, 100001]
+    , "lr_gamma": 0.5
+
+    , "pixel_criterion": "l1"
+    , "pixel_weight": 1.0
+    , "val_freq": 1e3
+
+    , "manual_seed": 0
+    , "niter": 100001
+  }
+
+  , "logger": {
+    "print_freq": 200
+    , "save_checkpoint_freq":1e3
+  }
+}

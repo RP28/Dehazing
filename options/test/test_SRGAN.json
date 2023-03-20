@@ -1,0 +1,30 @@
+{
+  "name": "Dehaze"
+  , "suffix": "_GAN"
+  , "model": "srgan"
+  , "scale": 1
+  , "gpu_ids": [0]
+
+  , "datasets": {
+    "test_1": { // the 1st test dataset
+      "name": "Val"
+      , "mode": "LR"
+      , "dataroot_LR": "F:\\Kalpesh\\Colab\\NTIRE2021_Valid_Hazy"
+    }
+  }
+
+  , "path": {
+    "root": "F:\\Kalpesh\\Colab"
+    , "pretrain_model_G": "F:\\Kalpesh\\Colab\\experiments\\Dehazing_Full_Attention_GAN\\models\\276000_G.pth"
+  }
+
+  , "network_G": {
+    "which_model_G": "SRGAN_Gen"
+    , "norm_type": null
+    , "mode": "CNA"
+    , "nf": 64
+    , "nb": 23
+    , "in_nc": 3
+    , "out_nc": 3
+  }
+}
